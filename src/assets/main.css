@@ -1,0 +1,6 @@
+body {
+    margin: 0; /* Убираем отступы */
+    background-color: #050F28; /* Цвет фона */
+    height: 100vh; /* Гарантируем, что фон охватывает всю высоту окна */
+    font-family: "Montserrat", sans-serif;
+}
