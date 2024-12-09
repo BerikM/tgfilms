@@ -1,16 +1,10 @@
 <script>
-import Header from "@/components/Header.vue";
-import ImageSlider from "@/components/ImageSlider.vue";
-import LastFilm from "@/components/LastFilm.vue";
-import Selector from "@/components/Selector.vue";
+import Header from './components/Header.vue';
 
 export default {
-  name: "Home",
+  name: "App",
   components: {
     Header,
-    LastFilm,
-    Selector,
-    ImageSlider
   },
 }
 </script>
@@ -18,11 +12,8 @@ export default {
 <template>
     <div class="container">
         <Header></Header>
-        <LastFilm></LastFilm>
-        <ImageSlider></ImageSlider>
-        <Selector></Selector>
+        <RouterView></RouterView>
     </div>
-  <!-- <RouterView /> -->
 </template>
 
 <style scoped>
