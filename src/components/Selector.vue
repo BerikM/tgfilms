@@ -8,9 +8,9 @@ export default {
 
 <template>
     <div class="container">
-        <div class="item"><div class="text">Сериалы</div></div>
-        <div class="item"><div class="text">Мульфильмы</div></div>
-        <div class="item"><div class="text">Фильмы</div></div>
+       <router-link to="/list/serial" class="link"> <div class="item" ><div class="text">Сериалы</div></div></router-link>
+        <router-link to="/list/mult" class="link"><div class="item"><div class="text">Мульфильмы</div></div></router-link>
+        <router-link to="/list/film" class="link"><div class="item"><div class="text">Фильмы</div></div></router-link>
     </div>
 </template>
 
@@ -40,5 +40,9 @@ export default {
     .text{
         width: 100%;
         text-align: center;
+    }
+    .link{
+        text-decoration: none;
+        color: #000;
     }
 </style>
