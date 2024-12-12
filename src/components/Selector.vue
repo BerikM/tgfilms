@@ -8,9 +8,9 @@ export default {
 
 <template>
     <div class="container">
-       <router-link to="/list/serial" class="link"> <div class="item" ><div class="text">Сериалы</div></div></router-link>
-        <router-link to="/list/mult" class="link"><div class="item"><div class="text">Мульфильмы</div></div></router-link>
-        <router-link to="/list/film" class="link"><div class="item"><div class="text">Фильмы</div></div></router-link>
+       <router-link to="/list/series" class="link"> <div class="item" ><div class="text">Сериалы</div></div></router-link>
+        <router-link to="/list/multfilm" class="link"><div class="item"><div class="text">Мульфильмы</div></div></router-link>
+        <router-link to="/list/films" class="link"><div class="item"><div class="text">Фильмы</div></div></router-link>
     </div>
 </template>
 
