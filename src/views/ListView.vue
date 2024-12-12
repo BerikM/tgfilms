@@ -65,7 +65,7 @@ export default {
   align-items: center;
 }
 img{
-  width: 350px;
+  width: auto;
   height: 300px;
   align-items: center;
   border-radius: 30px;
