@@ -1,19 +1,19 @@
 <template>
   <main>
     <div class="container">
-      <div class="item" v-for="item in filteredList" :key="item.id">
-        <p>{{ item.name }}</p> <!-- Выводим название фильма или другое поле -->
-        <img :src=item.photo_big alt="Изображение не найдено" srcset="">
-      </div>
-      <div>
-      </div>
+        <div class="item" v-for="item in filteredList" :key="item.id">
+            <router-link :to="`/film/${item.id}`">
+                <p>{{ item.name }}</p> 
+            </router-link>
+                <img :src=item.photo_big alt="Изображение не найдено" srcset="">
+        </div>
     </div>
   </main>
 </template>
 
 <script>
-import { ref, onBeforeMount, computed } from 'vue';
-import { useRoute } from 'vue-router'; // Импортируем useRoute
+import { computed, onBeforeMount, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
   name: "List",
