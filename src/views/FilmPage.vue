@@ -1,7 +1,9 @@
 <script>
 export default {
-  name: "FilmPage",
-
+    name: "FilmPage",
+    setup(){
+        const type = ref(route.params.id);
+    }
 }
 </script>
 
