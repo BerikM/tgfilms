@@ -1,27 +1,78 @@
 <script>
+import { computed, onBeforeMount, ref } from 'vue';
+import { useRoute } from 'vue-router';
 export default {
     name: "FilmPage",
     setup(){
-        const type = ref(route.params.id);
+        const list = ref([]);
+        const route = useRoute();
+        const id = ref(route.params.id);
+
+        async function fetchDataFromServer() {
+        try {
+        const response = await fetch('https://zigees.pythonanywhere.com/api/v1/filmslist/', {
+          method: "GET",
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await response.json();
+        list.value = data;
+      } catch (error) {
+        console.log('Ошибка', error);
+      }
     }
+
+    onBeforeMount(async () => {
+            await fetchDataFromServer();
+        });
+
+    const currentFilm = computed(() => {
+      return list.value.find(item => item.id === Number(id.value));
+    });
+
+    return {
+        id,
+        currentFilm,
+        list
+    }
+    },
+    methods:{
+        getDate(){
+            const day = this.currentFilm.date_prod.slice(-2);
+            const month = Number(this.currentFilm.date_prod.slice(-5, -3))/1;
+            const year = this.currentFilm.date_prod.slice(0,4);
+            const months = [
+                'Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 
+                'Июля', 'Августа', 'Сентября', 'Октября', 'Ноября', 'Декабря'
+            ];
+            return day +" "+ months[month]+" " + year + " Года";
+        }
+        , getGenres(){
+            let text = '';
+            this.currentFilm.genre.forEach(item => {
+                text += item.name + ', ';
+            });
+            return text;
+        }
+    }
+    
 }
 </script>
 
 <template>
-  <div class="container-main">
-        <p class="title-text"> Трансформеры: Начало </p>
-        <img class="main-img" src="https://zigees.pythonanywhere.com/media/photos_big/2024/12/12/%D0%94%D0%B6%D0%BE%D0%BA%D0%B5%D1%80.jpeg" alt="" srcset="">
+  <div class="container-main" v-if="currentFilm">
+        <p class="title-text"> {{ this.currentFilm.name }} </p>
+        <img class="main-img" :src="this.currentFilm.photo_big" alt="Изображение загружается" srcset="">
         <p>Год производства:</p>
-        <p>30 августа 2024</p>
-        <p>Жанр: мультфильм, фантастика, фэнтези, боевик, приключения </p>
+        <p>{{ getDate() }}</p>
+        <p>Жанр: {{ getGenres() }} </p>
         <p>Время: 104 мин</p>
         <p>В качестве: 720р</p>
   </div>
 
-  <div class="container-discription">
+  <div class="container-discription" v-if="currentFilm">
         <h3 class="name" >Про что</h3>
-        <h3 class="name" >Трансформеры: Начало</h3>
-        <p class="discription">Действие происходит на планете Кибертрон, населенной трансформерами, и  рассказываето дружбе Ориона Пакса и Д-16. Будучи роботами низшего  класса, неспособными на трансформацию</p>
+        <h3 class="name" >{{ currentFilm.name }}</h3>
+        <p class="description">{{ this.currentFilm.description }}</p>
   </div>
 
   <div class="container-video">
@@ -45,7 +96,7 @@ export default {
 
 .container-main{
     width: 400px;
-    height: 600px;
+    height: auto;
     background-color: white;
     border-radius: 40px;
     margin-top: 15px;
@@ -86,7 +137,7 @@ p{
     font-size: 15px;
     text-align: center;
 }
-.discription{
+.description{
     width: 300px;
     margin: 0 auto;
     margin-top: 5px;
@@ -142,5 +193,8 @@ video{
     color: white;
     margin: 0 auto;
 }
-
+p{
+    max-width: 380px;
+    margin-top: 5px;
+}
 </style>
