@@ -75,7 +75,7 @@ export default {
         <p class="description">{{ this.currentFilm.description }}</p>
   </div>
 
-  <div class="container-video">
+  <div class="container-video" v-if="currentFilm">
     <p class="video-text">Озвучка:</p>
     <div class="voices">
         <div class="voices-item">Дубляж</div>
@@ -84,7 +84,7 @@ export default {
         <div class="voices-item">Дубляж</div>
     </div>
     <video controls>
-        <source src="https://zigees.pythonanywhere.com/media/video/2024/12/12/%D0%94%D0%B6%D0%BE%D0%BA%D0%B5%D1%80-%D1%82%D1%80%D0%B5%D0%B9%D0%BB%D0%B5%D1%80.av1.mp4" type="video/mp4">
+        <source :src="currentFilm.video[0].video" type="video/mp4">
     </video>
      <div class="download">Скачать</div>
   </div>
